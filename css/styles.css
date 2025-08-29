@@ -501,12 +501,13 @@ nav {
 
 /* Bottom Values Row - Centered Layout */
 .values-row-bottom {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
+    justify-items: center;
 }
 
 /* Individual Value Card */
