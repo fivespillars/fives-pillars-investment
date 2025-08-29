@@ -442,3 +442,359 @@ function setupFullscreenModalCloseHandlers(closeButton, backdrop, modal, modalIm
         }
     });
 } 
+
+/* ========================================
+   CONTACT FORM WITH FORMSPREE INTEGRATION
+   ======================================== */
+
+/**
+ * Setup contact form with Formspree integration and validation
+ */
+function setupContactForm() {
+    const form = document.querySelector('.contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    
+    // Rate limiting - prevent multiple submissions within 30 seconds
+    let lastSubmissionTime = 0;
+    const SUBMISSION_COOLDOWN = 30000; // 30 seconds
+    
+    if (form) {
+        // Handle form submission
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            // Check rate limiting
+            const now = Date.now();
+            if (now - lastSubmissionTime < SUBMISSION_COOLDOWN) {
+                const remainingTime = Math.ceil((SUBMISSION_COOLDOWN - (now - lastSubmissionTime)) / 1000);
+                showFormStatus('error', `Please wait ${remainingTime} seconds before submitting another message.`);
+                return;
+            }
+            
+            // Show loading state
+            setFormLoading(true);
+            
+            try {
+                // Get form data
+                const formData = new FormData(form);
+                
+                // Basic client-side validation
+                const validationResult = validateForm(formData);
+                if (validationResult !== true) {
+                    throw new Error(validationResult);
+                }
+                
+                // Submit to Formspree with timeout
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+                
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    },
+                    signal: controller.signal
+                });
+                
+                clearTimeout(timeoutId);
+                
+                if (response.ok) {
+                    // Success - show success message
+                    showFormStatus('success', 'Thank you! Your message has been sent successfully. We\'ll get back to you soon.');
+                    form.reset(); // Clear the form
+                    lastSubmissionTime = now; // Update submission time
+                } else {
+                    // Error from Formspree
+                    try {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || 'Failed to send message. Please try again.');
+                    } catch (parseError) {
+                        // If we can't parse the error response, show a generic message
+                        throw new Error(`Server error (${response.status}). Please try again later.`);
+                    }
+                }
+                
+            } catch (error) {
+                // Handle specific error types
+                let errorMessage = 'An unexpected error occurred. Please try again.';
+                
+                if (error.name === 'AbortError') {
+                    errorMessage = 'Request timed out. Please check your internet connection and try again.';
+                } else if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                    errorMessage = 'Network error. Please check your internet connection and try again.';
+                } else if (error.message) {
+                    errorMessage = error.message;
+                }
+                
+                // Show error message
+                showFormStatus('error', errorMessage);
+            } finally {
+                // Hide loading state
+                setFormLoading(false);
+            }
+        });
+        
+        // Real-time validation feedback
+        setupFormValidation(form);
+        
+        // Setup character counter for message field
+        setupCharacterCounter();
+    }
+}
+
+/**
+ * Validate form data before submission
+ * @param {FormData} formData - The form data to validate
+ * @returns {string|true} - Error message if invalid, true if valid
+ */
+function validateForm(formData) {
+    const name = formData.get('name')?.trim();
+    const email = formData.get('email')?.trim();
+    const message = formData.get('message')?.trim();
+    
+    // Check if honeypot field is filled (spam protection)
+    if (formData.get('_gotcha')) {
+        return 'Spam protection triggered. Please try again.';
+    }
+    
+    // Validate name (2-100 characters, letters, spaces, hyphens, and apostrophes only)
+    if (!name) {
+        return 'Name is required.';
+    }
+    
+    const nameRegex = /^[A-Za-z\s\-']{2,100}$/;
+    if (!nameRegex.test(name)) {
+        return 'Name can only contain letters, spaces, hyphens, and apostrophes (2-100 characters).';
+    }
+    
+    // Validate email format
+    if (!email) {
+        return 'Email is required.';
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        return 'Please enter a valid email address.';
+    }
+    
+    if (email.length > 254) {
+        return 'Email address is too long.';
+    }
+    
+    // Validate message (10-1000 characters, basic XSS protection)
+    if (!message) {
+        return 'Message is required.';
+    }
+    
+    if (message.length < 10) {
+        return 'Message must be at least 10 characters long.';
+    }
+    
+    if (message.length > 1000) {
+        return 'Message is too long (maximum 1000 characters).';
+    }
+    
+    // Basic XSS protection - check for script tags and other dangerous patterns
+    const dangerousPatterns = /<script|javascript:|vbscript:|onload=|onerror=|onclick=/i;
+    if (dangerousPatterns.test(message)) {
+        return 'Message contains invalid content. Please remove any special formatting.';
+    }
+    
+    return true;
+}
+
+/**
+ * Setup real-time form validation with visual feedback
+ * @param {HTMLElement} form - The form element
+ */
+function setupFormValidation(form) {
+    const inputs = form.querySelectorAll('input, textarea');
+    
+    inputs.forEach(input => {
+        // Remove existing validation classes
+        input.addEventListener('blur', function() {
+            validateField(this);
+        });
+        
+        // Clear validation on input
+        input.addEventListener('input', function() {
+            clearFieldValidation(this);
+        });
+    });
+}
+
+/**
+ * Validate a single form field
+ * @param {HTMLElement} field - The field element to validate
+ */
+function validateField(field) {
+    const value = field.value.trim();
+    const fieldType = field.type;
+    const minLength = field.minLength;
+    const maxLength = field.maxLength;
+    
+    // Clear previous validation
+    clearFieldValidation(field);
+    
+    // Check required field
+    if (field.required && !value) {
+        showFieldError(field, 'This field is required.');
+        return false;
+    }
+    
+    // Check minimum length
+    if (minLength && value.length < minLength) {
+        showFieldError(field, 'This field is too short.');
+        return false;
+    }
+    
+    // Check maximum length
+    if (maxLength && value.length > maxLength) {
+        showFieldError(field, 'This field is too long.');
+        return false;
+    }
+    
+    // Check email format
+    if (fieldType === 'email' && value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+            showFieldError(field, 'Please enter a valid email address.');
+            return false;
+        }
+    }
+    
+    // Show success state
+    showFieldSuccess(field);
+    return true;
+}
+
+/**
+ * Show error state for a form field
+ * @param {HTMLElement} field - The field element
+ * @param {string} message - Error message to display
+ */
+function showFieldError(field, message) {
+    field.classList.add('error');
+    
+    // Create or update error message
+    let errorElement = field.parentNode.querySelector('.field-error');
+    if (!errorElement) {
+        errorElement = document.createElement('div');
+        errorElement.className = 'field-error';
+        errorElement.style.color = '#ff6b6b';
+        errorElement.style.fontSize = '0.875rem';
+        errorElement.style.marginTop = '0.25rem';
+        field.parentNode.appendChild(errorElement);
+    }
+    errorElement.textContent = message;
+}
+
+/**
+ * Show success state for a form field
+ * @param {HTMLElement} field - The field element
+ */
+function showFieldSuccess(field) {
+    field.classList.add('success');
+    
+    // Remove error message if it exists
+    const errorElement = field.parentNode.querySelector('.field-error');
+    if (errorElement) {
+        errorElement.remove();
+    }
+}
+
+/**
+ * Clear validation state for a form field
+ * @param {HTMLElement} field - The field element
+ */
+function clearFieldValidation(field) {
+    field.classList.remove('error', 'success');
+    
+    // Remove error message if it exists
+    const errorElement = field.parentNode.querySelector('.field-error');
+    if (errorElement) {
+        errorElement.remove();
+    }
+}
+
+/**
+ * Show form submission status message
+ * @param {string} type - Status type: 'success' or 'error'
+ * @param {string} message - Status message to display
+ */
+function showFormStatus(type, message) {
+    const formStatus = document.getElementById('form-status');
+    
+    if (formStatus) {
+        // Set message content and styling
+        formStatus.textContent = message;
+        formStatus.className = `form-status ${type}`;
+        
+        // Show the status message
+        formStatus.style.display = 'block';
+        
+        // Auto-hide success messages after 5 seconds
+        if (type === 'success') {
+            setTimeout(() => {
+                formStatus.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Scroll to status message
+        formStatus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+/**
+ * Set form loading state
+ * @param {boolean} isLoading - Whether to show loading state
+ */
+function setFormLoading(isLoading) {
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoading = submitBtn.querySelector('.btn-loading');
+    
+    if (isLoading) {
+        // Show loading state
+        submitBtn.disabled = true;
+        btnText.style.display = 'none';
+        btnLoading.style.display = 'inline';
+        submitBtn.classList.add('loading');
+    } else {
+        // Hide loading state
+        submitBtn.disabled = false;
+        btnText.style.display = 'inline';
+        btnLoading.style.display = 'none';
+        submitBtn.classList.remove('loading');
+    }
+}
+
+/**
+ * Setup character counter for the message textarea
+ */
+function setupCharacterCounter() {
+    const messageField = document.getElementById('message');
+    const counter = document.getElementById('message-counter');
+    const currentCount = counter.querySelector('.current-count');
+    
+    if (messageField && counter) {
+        // Update counter on input
+        messageField.addEventListener('input', function() {
+            const length = this.value.length;
+            currentCount.textContent = length;
+            
+            // Change color based on length
+            if (length >= 1000) {
+                counter.style.color = '#ff6b6b';
+            } else if (length >= 800) {
+                counter.style.color = '#ffa726';
+            } else {
+                counter.style.color = 'var(--white)';
+            }
+        });
+        
+        // Initialize counter
+        currentCount.textContent = '0';
+    }
+} 

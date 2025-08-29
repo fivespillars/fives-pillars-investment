@@ -3,7 +3,7 @@
 <head>
     <!-- Security headers for enhanced protection -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' 'unsafe-eval';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://formspree.io;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     
@@ -248,21 +248,38 @@
         <section id="contact" class="section contact-form-section component">
             <div class="container">
                 <h2>Contact Us</h2>
-                <!-- Simple contact form with validation -->
-                <form class="contact-form" autocomplete="off">
+                <!-- Simple contact form with validation and Formspree integration -->
+                <form class="contact-form" action="https://formspree.io/f/mldwgvqo" method="POST" autocomplete="off" aria-label="Contact Form">
+                    <!-- Honeypot field for spam protection -->
+                    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+                    
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required placeholder="Your Name">
+                        <label for="name">Name <span class="required" aria-label="required">*</span></label>
+                        <input type="text" id="name" name="name" required placeholder="Your Name" minlength="2" maxlength="100" pattern="[A-Za-z\s\-']{2,100}" title="Please enter a valid name (2-100 characters, letters, spaces, hyphens, and apostrophes only)" autocomplete="name" aria-required="true" aria-describedby="name-help">
+                        <div id="name-help" class="field-help" style="display: none;">Name must be 2-100 characters and contain only letters, spaces, hyphens, and apostrophes.</div>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required placeholder="you@email.com">
+                        <label for="email">Email <span class="required" aria-label="required">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="you@email.com" maxlength="254" autocomplete="email" aria-required="true" aria-describedby="email-help">
+                        <div id="email-help" class="field-help" style="display: none;">Please enter a valid email address.</div>
                     </div>
                     <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" required placeholder="Type your message..."></textarea>
+                        <label for="message">Message <span class="required" aria-label="required">*</span></label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Type your message..." minlength="10" maxlength="1000" autocomplete="off" aria-describedby="message-counter message-help" aria-required="true"></textarea>
+                        <div id="message-counter" class="char-counter" aria-live="polite">
+                            <span class="current-count">0</span> / <span class="max-count">1000</span> characters
+                        </div>
+                        <div id="message-help" class="field-help" style="display: none;">Message must be 10-1000 characters long.</div>
                     </div>
-                    <button type="submit" class="cta-button">Send Message</button>
+                    
+                    <!-- Form submission status messages -->
+                    <div id="form-status" class="form-status" style="display: none;" role="alert" aria-live="polite"></div>
+                    
+                    <button type="submit" class="cta-button" id="submit-btn" aria-describedby="submit-help">
+                        <span class="btn-text">Send Message</span>
+                        <span class="btn-loading" style="display: none;">Sending...</span>
+                    </button>
+                    <div id="submit-help" class="field-help">Click to send your message. You can only submit once every 30 seconds.</div>
                 </form>
             </div>
         </section>

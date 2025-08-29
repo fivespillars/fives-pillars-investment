@@ -658,6 +658,44 @@
         text-align: center; 
     }
     
+    /* Mobile form validation states */
+    .form-group input.error,
+    .form-group textarea.error {
+        border-color: #ff6b6b;
+        box-shadow: 0 0 8px rgba(255, 107, 107, 0.3);
+    }
+    
+    .form-group input.success,
+    .form-group textarea.success {
+        border-color: #51cf66;
+        box-shadow: 0 0 8px rgba(81, 207, 102, 0.3);
+    }
+    
+    /* Mobile form status messages */
+    .form-status {
+        padding: 0.8rem;
+        margin: 0.8rem 0;
+        font-size: 0.9rem;
+    }
+    
+    /* Mobile field error messages */
+    .field-error {
+        font-size: 0.8rem !important;
+        margin-top: 0.2rem !important;
+    }
+    
+    /* Mobile character counter */
+    .char-counter {
+        font-size: 0.8rem;
+        margin-top: 0.3rem;
+    }
+    
+    /* Mobile field help text */
+    .field-help {
+        font-size: 0.75rem;
+        margin-top: 0.2rem;
+    }
+    
     /* ========================================
        MOBILE FOOTER
        ======================================== */
