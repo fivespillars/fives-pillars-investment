@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Fives Pillars</title>
+    
+    <!-- Automatic redirect to main page -->
+    <meta http-equiv="refresh" content="0; url=./main.html">
+    
+    <style>
+        /* ========================================
+           404 ERROR PAGE STYLES
+           ======================================== */
+        
+        /* Body layout and typography */
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        /* Content container */
+        .container {
+            max-width: 600px;
+            padding: 2rem;
+            width: 100%;
+        }
+        
+        /* Main heading */
+        h1 {
+            color: #0066cc;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+        
+        /* Description text */
+        p {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        /* Link styling */
+        a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        /* Link hover effect */
+        a:hover {
+            text-decoration: underline;
+            color: #FFD700;
+        }
+        
+        /* ========================================
+           MOBILE RESPONSIVE STYLES
+           ======================================== */
+        
+        /* Tablet and small desktop */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                max-width: 500px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Mobile phones */
+        @media (max-width: 480px) {
+            body {
+                padding: 0.5rem;
+            }
+            
+            .container {
+                padding: 1rem;
+                max-width: 100%;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            p {
+                font-size: 0.95rem;
+                margin-bottom: 1.5rem;
+            }
+        }
+        
+        /* Extra small mobile */
+        @media (max-width: 360px) {
+            .container {
+                padding: 0.8rem;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            p {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Landscape orientation */
+        @media (max-height: 500px) and (orientation: landscape) {
+            body {
+                height: 100vh;
+                padding: 0.5rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            p {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main content container -->
+    <div class="container">
+        <!-- Error heading -->
+        <h1>Page Not Found</h1>
+        
+        <!-- Error description -->
+        <p>The page you're looking for doesn't exist. You will be redirected to the homepage shortly.</p>
+        
+        <!-- Manual redirect link -->
+        <p><a href="./main.html">Click here if you're not redirected automatically</a></p>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,1751 @@
+/* ========================================
+   FIVES PILLARS - MAIN STYLESHEET
+   ======================================== */
+
+/* CSS Custom Properties (Variables) for consistent theming */
+:root {
+    /* Primary Brand Colors */
+    --primary-gold: #FFD700;
+    --primary-blue: #0066cc;
+    --secondary-blue: #004d99;
+    --gold: #FFD700;
+    
+    /* Neutral Colors */
+    --carbon-black: #181A1B;
+    --white: #fff;
+    --light-gray: #f5f5f5;
+    --dark-gray: #333;
+    --text-color: #fff;
+    --black: #000;
+    
+    /* Spacing and Layout */
+    --spacing: 1rem;
+    --radius: 8px;
+    --transition: all 0.3s ease;
+    
+    /* Shadow Effects */
+    --shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.35);
+    --shadow-glow: 0 0 12px 2px var(--primary-gold), 0 2px 16px rgba(0, 0, 0, 0.25);
+    --shadow-strong: 0 8px 16px rgba(0, 0, 0, 0.5);
+    --shadow-text: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    
+    /* Background Pattern */
+    --honeycomb-color: rgba(255, 215, 0, 0.05);
+    --honeycomb-size: 60px;
+    --glow: 0 0 12px 2px var(--gold);
+}
+
+/* Global Reset and Base Styles */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    scroll-behavior: smooth; 
+}
+
+/* Body Base Styles */
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    line-height: 1.6;
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+    padding-top: 70px;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Simplified Honeycomb Background Pattern - Performance Optimized */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: var(--black);
+    background-image: 
+        linear-gradient(45deg, var(--honeycomb-color) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--honeycomb-color) 25%, transparent 25%);
+    background-size: 60px 60px;
+    background-position: 0 0, 30px 30px;
+    animation: subtleMove 60s linear infinite;
+    -webkit-animation: subtleMove 60s linear infinite;
+}
+
+
+
+/* Honeycomb Background Animation */
+@keyframes subtleMove {
+    0% { 
+        background-position: 0 0, 30px 30px; 
+    }
+    100% { 
+        background-position: 60px 60px, 90px 90px; 
+    }
+}
+
+/* Webkit Animation Support for Safari */
+@-webkit-keyframes subtleMove {
+    0% { 
+        background-position: 0 0, 30px 30px; 
+    }
+    100% { 
+        background-position: 60px 60px, 90px 90px; 
+    }
+}
+
+/* Typography Styles */
+h1, h2, h3, h4, h5, h6 { 
+    color: var(--gold); 
+    font-weight: 600; 
+    margin-bottom: var(--spacing); 
+}
+
+.lead-text { 
+    font-size: 1.2rem; 
+    line-height: 1.6; 
+    margin-bottom: var(--spacing); 
+}
+
+/* Layout Container */
+.container { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 var(--spacing); 
+}
+
+/* ========================================
+   HEADER SECTION
+   ======================================== */
+
+/* Fixed Header with Backdrop Blur */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Header Container Layout */
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem var(--spacing);
+}
+
+/* Navigation Container */
+nav { 
+    flex: 1; 
+    display: flex; 
+    justify-content: center; 
+}
+
+/* Navigation Links List */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+/* Individual Navigation Links */
+.nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    transition: var(--transition);
+    position: relative;
+    font-weight: 500;
+}
+
+/* Navigation Link Hover and Focus States */
+.nav-links a:hover, 
+.nav-links a:focus {
+    color: var(--gold);
+    text-shadow: 0 0 8px var(--gold);
+}
+
+/* Navigation Link Underline Effect */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+    box-shadow: 0 0 8px var(--gold);
+}
+
+/* Navigation Link Underline Animation on Hover */
+.nav-links a:hover::after, 
+.nav-links a:focus::after { 
+    width: 80%; 
+}
+
+/* Active Navigation Link State */
+.nav-links a.active {
+    color: var(--gold);
+    text-shadow: 0 0 8px var(--gold);
+}
+
+.nav-links a.active::after {
+    width: 80%;
+    background: var(--gold);
+    box-shadow: 0 0 8px var(--gold);
+}
+
+/* ========================================
+   LOGO SECTION
+   ======================================== */
+
+/* Logo Wrapper Container */
+.logo-wrapper { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Main Logo Image */
+.main-logo { 
+    width: 100vw; 
+    height: 100vh; 
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px var(--gold)); 
+}
+
+/* ========================================
+   HERO SECTION
+   ======================================== */
+
+/* Full-Screen Hero Display */
+.hero {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--black), var(--dark-gray));
+    margin: 0;
+    padding: 0;
+}
+
+/* Hero Background Overlay */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Hero Banner Background Image */
+.hero-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* Hero Content Container */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--white);
+    max-width: 800px;
+    padding: 0 var(--spacing);
+}
+
+/* Hero Main Heading */
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px var(--gold);
+    color: var(--gold);
+}
+
+/* Hero Tagline */
+.tagline {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    color: var(--white);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* ========================================
+   SECTION STYLES
+   ======================================== */
+
+/* General Section Layout */
+.section {
+    padding: 4rem 0;
+    position: relative;
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+/* Section Background Pattern - Made transparent to show honeycomb */
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Section Headings */
+.section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--gold);
+    position: relative;
+    z-index: 1;
+}
+
+/* Section Heading Underline */
+.section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 2px;
+    animation: gold-shimmer 3s ease-in-out infinite alternate;
+}
+
+/* Gold Shimmer Animation */
+@keyframes gold-shimmer {
+    0% { 
+        box-shadow: 0 0 10px var(--gold); 
+    }
+    100% { 
+        box-shadow: 0 0 20px var(--gold), 0 0 30px var(--gold); 
+    }
+}
+
+/* ========================================
+   ABOUT SECTION
+   ======================================== */
+
+/* About Content Layout */
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* ========================================
+   CARD STYLES
+   ======================================== */
+
+/* Unified Card Styling for Services, Values, and Founders */
+.service-card, 
+.value-card, 
+.founder-card {
+    background: var(--dark-gray);
+    padding: 2rem;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 350px;
+    height: 100%;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Card Hover Effects */
+.service-card:hover, 
+.value-card:hover, 
+.founder-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--glow), var(--shadow);
+    border-color: var(--gold);
+}
+
+/* Card Headings */
+.service-card h3, 
+.value-card h3, 
+.founder-card h3 {
+    color: var(--gold);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+/* ========================================
+   SERVICES GRID
+   ======================================== */
+
+/* Services Grid - 3 Column Layout with Centered Bottom Row */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Top row - 3 cards spanning full width (Rule of Thirds) */
+.services-grid > .service-card:nth-child(1),
+.services-grid > .service-card:nth-child(2),
+.services-grid > .service-card:nth-child(3) {
+    grid-column: span 1;
+}
+
+/* Bottom row - 2 cards centered as a balanced unit */
+.services-grid > .service-card:nth-child(4) {
+    grid-column: 1 / 2; /* First column */
+    justify-self: center;
+}
+
+.services-grid > .service-card:nth-child(5) {
+    grid-column: 3 / 4; /* Third column */
+    justify-self: center;
+}
+
+/* Individual Service Card Styling */
+.service-card {
+    width: 100%;
+    height: auto;
+    min-height: 250px;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: var(--radius);
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Service Card List Styling */
+.service-card ul {
+    display: inline-block;
+    text-align: left;
+    margin-top: 1rem;
+    list-style: none;
+    padding: 0;
+}
+
+/* Service Card List Items */
+.service-card li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Service Card List Item Arrow */
+.service-card li::before {
+    content: '→';
+    color: var(--gold);
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+/* Values Grid Layout */
+.values-grid-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Individual Values Row */
+.values-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    justify-items: center;
+}
+
+/* Bottom Values Row - Centered Layout */
+.values-row-bottom {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Individual Value Card */
+.value-card {
+    width: 100%;
+    height: auto;
+    min-height: 200px;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: var(--radius);
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Value Card Description Text */
+.value-card p {
+    color: var(--white);
+    line-height: 1.5;
+}
+
+/* ========================================
+   FOUNDERS SECTION
+   ======================================== */
+
+/* Founders Section Container */
+.founders-section {
+    padding: 4rem 0;
+    background: transparent;
+}
+
+/* Founders Section Heading */
+.founders-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--gold);
+}
+
+/* Founders Grid - Improved Responsive Layout */
+.founders-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--spacing);
+    width: 100%;
+}
+
+/* Individual Founder Card */
+.founder-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: var(--radius);
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+/* Founder Profile Photo */
+.founder-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--gold);
+    margin-bottom: 1rem;
+    transition: var(--transition);
+    cursor: pointer; /* Indicate clickable */
+}
+
+/* Founder Photo Hover Effect */
+.founder-photo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px var(--gold);
+    border-color: var(--gold);
+}
+
+/* Founder Card Hover Effects */
+.founder-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+}
+
+/* Founder Photo Hover Effect */
+.founder-card:hover .founder-photo {
+    box-shadow: 0 0 20px var(--gold);
+    transform: scale(1.05);
+}
+
+/* Founder Card Heading */
+.founder-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--gold);
+    text-align: center;
+}
+
+/* Founder Job Title */
+.founder-title {
+    font-size: 0.8rem;
+    color: var(--white);
+    opacity: 0.8;
+    text-align: center;
+    line-height: 1.3;
+}
+
+/* ========================================
+   PROJECTS SECTION
+   ======================================== */
+
+/* Projects Grid Layout - Desktop First Approach */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--spacing);
+    width: 100%;
+}
+
+/* Individual Project Card Styling */
+.project-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: var(--radius);
+    padding: 2rem;
+    text-align: center;
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Project Logo Button Styling */
+.project-logo-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    transition: var(--transition);
+    margin-bottom: 1rem;
+    display: block;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover Effect for Logo Buttons */
+.project-logo-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Project Logo Image Styling */
+.project-logo {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    transition: var(--transition);
+}
+
+/* Logo Hover Effect */
+.project-logo-btn:hover .project-logo {
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+}
+
+/* Project Card Title Styling */
+.project-card h3 {
+    color: var(--gold);
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* Project Card Description Styling */
+.project-card p {
+    color: var(--white);
+    font-size: 1rem;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+/* Hover Effect for Project Cards */
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--glow), var(--shadow);
+    border-color: var(--gold);
+}
+
+/* ========================================
+   CONTACT FORM SECTION
+   ======================================== */
+
+/* Contact Form Section Background */
+.contact-form-section {
+    background: transparent;
+}
+
+/* Contact Form Container */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+/* Form Group Container */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Form Labels */
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--gold);
+    font-weight: 500;
+}
+
+/* Form Input Fields */
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+/* Form Input Focus States */
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 10px var(--gold);
+}
+
+/* ========================================
+   BUTTON STYLES
+   ======================================== */
+
+/* Call-to-Action Button */
+.cta-button {
+    background: var(--gold);
+    color: var(--black);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+/* CTA Button Hover and Focus States */
+.cta-button:hover, 
+.cta-button:focus {
+    background: var(--gold);
+    box-shadow: 0 0 20px var(--gold);
+    transform: translateY(-2px);
+}
+
+/* CTA Button Shine Effect */
+.cta-button::before {
+    content: '';
+    position: absolute;
+    left: -75%;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 215, 0, 0.5), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.5s;
+    pointer-events: none;
+}
+
+/* CTA Button Shine Animation on Hover */
+.cta-button:hover::before, 
+.cta-button:focus::before {
+    left: 120%;
+    transition: left 0.5s;
+}
+
+/* ========================================
+   FOOTER SECTION
+   ======================================== */
+
+/* Footer Container */
+footer {
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+    border-top: 2px solid rgba(255, 215, 0, 0.2);
+    margin-top: 2rem;
+    padding-top: 1rem;
+}
+
+/* Footer Wave Decoration */
+.footer-waves {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+}
+
+/* Footer Wave SVG */
+.footer-waves svg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: waveFloat 8s ease-in-out infinite alternate;
+}
+
+/* Wave Floating Animation */
+@keyframes waveFloat {
+    0% { 
+        transform: translateY(0px); 
+    }
+    100% { 
+        transform: translateY(-20px); 
+    }
+}
+
+/* Footer Content Container */
+.footer-content {
+    position: relative;
+    z-index: 1;
+    padding: 3rem 0 1rem;
+    margin-top: 2rem;
+}
+
+/* Footer Grid Layout */
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Footer Section Styling */
+.footer-section {
+    text-align: center;
+}
+
+/* Footer Logo Wrapper */
+.footer-logo-wrapper {
+    margin-bottom: 1rem;
+}
+
+/* Footer Logo Image */
+.footer-logo {
+    max-width: 120px;
+    height: auto;
+    filter: drop-shadow(0 0 10px var(--gold));
+}
+
+/* Footer Logo Hover Effect */
+.footer-logo:hover {
+    transform: scale(1.05);
+}
+
+/* Footer Tagline */
+.footer-tagline {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+    opacity: 0.8;
+}
+
+/* Footer Section Headings */
+.footer-heading {
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+/* Footer Heading Underline */
+.footer-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 1px;
+}
+
+/* Footer Links List */
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Footer Links List Items */
+.footer-links li {
+    margin: 0;
+}
+
+/* Footer Links */
+.footer-links a {
+    color: var(--white);
+    text-decoration: none;
+    transition: var(--transition);
+    position: relative;
+    padding: 0.2rem 0;
+}
+
+/* Footer Link Underline Effect */
+.footer-links a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+}
+
+/* Footer Link Hover State */
+.footer-links a:hover {
+    color: var(--gold);
+}
+
+/* Footer Link Underline Animation */
+.footer-links a:hover::before {
+    width: 100%;
+}
+
+/* Footer Social Media Container */
+.footer-social {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+/* Social Media Link Dimensions and Styling */
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: var(--white);
+    text-decoration: none;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Social Media Link Shine Effect */
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+/* Social Media Link Shine Animation */
+.social-link:hover::before {
+    left: 100%;
+}
+
+/* Social Media Link Hover State */
+.social-link:hover {
+    background: var(--gold);
+    color: var(--black);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+/* Social Media Link Icon */
+.social-link svg {
+    width: 20px;
+    height: 20px;
+    z-index: 1;
+    position: relative;
+}
+
+/* Footer Contact Information */
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    text-align: center; /* Center align contact items to match other footer sections */
+    align-items: center; /* Center the flex items horizontally */
+}
+
+/* Individual Contact Item */
+.contact-item {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the content within each contact item */
+    gap: 0.5rem;
+    color: var(--white);
+    font-size: 0.9rem;
+    transition: var(--transition);
+    width: 100%; /* Ensure full width for proper centering */
+}
+
+/* Contact Item Hover Effect */
+.contact-item:hover {
+    color: var(--gold);
+}
+
+/* Contact Item Icon */
+.contact-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--gold);
+}
+
+/* Footer Bottom Section */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1rem;
+}
+
+/* Footer Divider Line */
+.footer-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin-bottom: 1rem;
+}
+
+/* Footer Bottom Content Layout */
+.footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Footer Copyright Text */
+.footer-copyright {
+    color: var(--white);
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* Footer Legal Links Container */
+.footer-legal {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Individual Legal Link */
+.legal-link {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: var(--transition);
+    position: relative;
+}
+
+/* Legal Link Underline Effect */
+.legal-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+}
+
+/* Legal Link Hover State */
+.legal-link:hover {
+    color: var(--gold);
+}
+
+/* Legal Link Underline Animation */
+.legal-link:hover::after {
+    width: 100%;
+}
+
+/* ========================================
+   FOUNDER MODAL
+   ======================================== */
+
+/* Founder Modal Overlay */
+.founder-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Founder Modal Active State */
+.founder-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Founder Modal Backdrop */
+.founder-modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+/* Founder Modal Content Container */
+.founder-modal-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    background: var(--black);
+    border-radius: var(--radius);
+    padding: 0;
+    border: 1px solid var(--gold);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Founder Modal Header - Image and Basic Info */
+.founder-modal-header {
+    position: relative;
+    background: linear-gradient(135deg, var(--black), var(--dark-gray));
+    padding: 2rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+/* Founder Modal Image */
+.founder-modal-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--gold);
+    margin: 0 auto 1rem;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+/* Founder Modal Name */
+.founder-modal-name {
+    color: var(--gold);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+/* Founder Modal Title */
+.founder-modal-title {
+    color: var(--white);
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin: 0;
+}
+
+/* Founder Modal Body - Biography Section */
+.founder-modal-body {
+    padding: 2rem;
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* Founder Modal Body Heading */
+.founder-modal-body h4 {
+    color: var(--gold);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 0.5rem;
+}
+
+/* Founder Autobiography Text */
+.founder-autobiography {
+    color: var(--white);
+    line-height: 1.7;
+    font-size: 1rem;
+    text-align: justify;
+    opacity: 0.9;
+}
+
+/* Founder Modal Close Button */
+.founder-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 215, 0, 0.1);
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    z-index: 10;
+}
+
+/* Founder Modal Close Button Hover State */
+.founder-modal-close:hover, 
+.founder-modal-close:focus {
+    background: var(--gold);
+    color: var(--black);
+    transform: scale(1.1);
+}
+
+/* Tech background removed for performance optimization */
+
+/* Laser animations removed for performance optimization */
+
+/* ========================================
+   MOBILE MENU - MOVED TO mobile.css
+   ======================================== */
+
+/* ========================================
+   ANIMATIONS - REMOVED (not used in HTML)
+   ======================================== */
+
+/* ========================================
+   RESPONSIVE DESIGN - MOVED TO mobile.css
+   ======================================== */
+
+/* Mobile Landscape */
+/* ========================================
+   MOBILE RESPONSIVE - MOVED TO mobile.css
+   ======================================== */
+
+/* ========================================
+   MOBILE STYLES - MOVED TO mobile.css
+   ======================================== */
+
+
+/* ========================================
+   LANDSCAPE ORIENTATION OPTIMIZATIONS
+   ======================================== */
+
+@media (max-height: 500px) and (orientation: landscape) {
+    /* Landscape hero height adjustment */
+    .hero { 
+        height: 40vh; 
+    }
+    
+    /* Landscape navigation adjustments */
+    .nav-links { 
+        padding: 1rem 1.5rem; 
+        gap: 1rem; 
+    }
+    
+    /* Landscape footer adjustments */
+    .footer-content { 
+        padding: 0.5rem 1rem; 
+    }
+    
+    /* Landscape footer grid */
+    .footer-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 1rem; 
+    }
+}
+
+/* ========================================
+   HIGH DPI DISPLAY SUPPORT
+   ======================================== */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* High DPI image rendering optimizations */
+    .footer-logo, 
+    .main-logo, 
+    .founder-photo {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* ========================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ======================================== */
+
+@media (hover: none) and (pointer: coarse) {
+    /* Touch device hover effect removal */
+    .footer-links a:hover, 
+    .social-link:hover, 
+    .legal-link:hover { 
+        transform: none; 
+    }
+    
+    /* Touch device active state effects */
+    .footer-links a:active, 
+    .social-link:active, 
+    .legal-link:active { 
+        transform: scale(0.95); 
+    }
+}
+/* ========================================
+   FOUNDER MODAL RESPONSIVE DESIGN
+   ======================================== */
+
+/* Note: Mobile modal adjustments moved to consolidated 768px media query above */
+
+/* Small Mobile Modal Adjustments */
+@media (max-width: 480px) {
+    /* Small Mobile Modal Content */
+    .founder-modal-content {
+        max-width: 98vw;
+        max-height: 98vh;
+        margin: 0.5rem;
+    }
+    
+    /* Small Mobile Modal Header */
+    .founder-modal-header {
+        padding: 1rem 0.8rem;
+    }
+    
+    /* Small Mobile Modal Image */
+    .founder-modal-img {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 0.6rem;
+    }
+    
+    /* Small Mobile Modal Name */
+    .founder-modal-name {
+        font-size: 1.3rem;
+    }
+    
+    /* Small Mobile Modal Title */
+    .founder-modal-title {
+        font-size: 0.9rem;
+    }
+    
+    /* Small Mobile Modal Body */
+    .founder-modal-body {
+        padding: 1rem 0.8rem;
+    }
+    
+    /* Small Mobile Autobiography Text */
+    .founder-autobiography {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+} 
+
+/* ========================================
+   PROJECTS MODAL STYLES
+   ======================================== */
+
+/* Projects modal container - matching existing founder modal */
+.projects-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    overflow: auto;
+    padding: 2rem 1rem;
+}
+
+/* Active state for projects modal */
+.projects-modal.active {
+    opacity: 1;
+}
+
+/* Projects modal backdrop */
+.projects-modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: -1;
+}
+
+/* Projects modal content container - matching existing modal */
+.projects-modal-content {
+    position: relative;
+    background: var(--dark-gray);
+    border: 2px solid var(--gold);
+    border-radius: 20px;
+    max-width: 900px;
+    width: 95%;
+    max-height: 85vh;
+    overflow: hidden;
+    box-shadow: var(--shadow-strong);
+    animation: modalSlideIn 0.3s ease;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Projects modal header with logo and title */
+.projects-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 2rem 1rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Projects modal logo image */
+.projects-modal-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+/* Projects modal project name - matching existing modal headings */
+.projects-modal-name {
+    color: var(--gold);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Projects modal body content */
+.projects-modal-body {
+    padding: 1.5rem 2rem 2rem 2rem;
+    overflow-y: auto;
+    flex: 1;
+    max-height: calc(85vh - 120px);
+}
+
+/* Projects modal body heading - matching existing modal headings */
+.projects-modal-body h4 {
+    color: var(--white);
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 0 0 1rem 0;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 0.5rem;
+}
+
+/* Projects description text - matching existing modal text */
+.projects-description {
+    color: var(--white);
+    font-size: 1rem;
+    line-height: 1.7;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+/* ========================================
+   PROJECTS GALLERY STYLES
+   ======================================== */
+
+/* Projects gallery section */
+.projects-gallery {
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+}
+
+/* Projects gallery heading */
+.projects-gallery h4 {
+    color: var(--gold);
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 0 0 1.5rem 0;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.projects-gallery h4::after {
+    content: "↕ Scroll to see more images";
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 400;
+    margin-left: auto;
+}
+
+/* Projects gallery grid */
+.projects-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 0 0.5rem 0.5rem 0.5rem;
+    margin: 0;
+    position: relative;
+    left: 0;
+    right: 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Project gallery image */
+.projects-gallery-grid img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+    cursor: pointer;
+    display: block;
+    position: relative;
+}
+
+/* Project gallery image hover effect */
+.projects-gallery-grid img:hover {
+    border-color: var(--gold);
+    transform: scale(1.05);
+    box-shadow: var(--shadow);
+}
+
+/* Gallery scrollbar styling */
+.projects-gallery-grid::-webkit-scrollbar {
+    width: 6px;
+}
+
+.projects-gallery-grid::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.projects-gallery-grid::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 3px;
+}
+
+.projects-gallery-grid::-webkit-scrollbar-thumb:hover {
+    background: var(--white);
+}
+
+/* Projects modal close button - matching existing close button */
+.projects-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 2rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: var(--transition);
+    z-index: 10;
+}
+
+/* Hover and focus states for close button - matching existing button hover */
+.projects-modal-close:hover,
+.projects-modal-close:focus {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--gold);
+    transform: scale(1.1);
+}
+
+/* Modal slide-in animation */
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ========================================
+   FULLSCREEN IMAGE MODAL STYLES
+   ======================================== */
+
+/* Fullscreen image modal container */
+.fullscreen-image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    overflow: hidden;
+}
+
+/* Active state for fullscreen image modal */
+.fullscreen-image-modal.active {
+    opacity: 1;
+}
+
+/* Fullscreen image modal backdrop */
+.fullscreen-image-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: -1;
+}
+
+/* Fullscreen image modal content */
+.fullscreen-image-content {
+    position: relative;
+    max-width: 95vw;
+    max-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+/* Fullscreen image styling */
+.fullscreen-image {
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: var(--shadow-strong);
+    transition: var(--transition);
+}
+
+/* Fullscreen image caption */
+.fullscreen-image-caption {
+    color: var(--white);
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 1rem;
+    opacity: 0.8;
+    max-width: 80%;
+}
+
+/* Fullscreen image modal close button */
+.fullscreen-image-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--white);
+    font-size: 2rem;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: var(--transition);
+    z-index: 10;
+}
+
+/* Hover and focus states for fullscreen close button */
+.fullscreen-image-close:hover,
+.fullscreen-image-close:focus {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--gold);
+    transform: scale(1.1);
+}
+
+/* Note: Mobile projects responsive styles moved to consolidated 768px media query above */ 

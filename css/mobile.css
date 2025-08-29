@@ -1,0 +1,1607 @@
+/* ========================================
+   FIVES PILLARS - MOBILE STYLESHEET
+   ======================================== */
+
+/* ========================================
+   MOBILE MENU COMPONENTS
+   ======================================== */
+
+/* Mobile Menu Toggle Button */
+.mobile-menu-button {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 10000;
+}
+
+/* ========================================
+   MOBILE MENU BACKDROP
+   ======================================== */
+
+/* Mobile menu backdrop for overlay effect */
+.mobile-menu-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Mobile menu backdrop active state */
+.mobile-menu-backdrop.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Mobile Menu Button Lines */
+.mobile-menu-button span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: var(--white);
+    margin: 5px 0;
+    transition: var(--transition);
+    transform-origin: center;
+}
+
+/* Mobile Menu Button Active State - First Line */
+.mobile-menu-button.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+/* Mobile Menu Button Active State - Second Line */
+.mobile-menu-button.active span:nth-child(2) {
+    opacity: 0;
+}
+
+/* Mobile Menu Button Active State - Third Line */
+.mobile-menu-button.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ========================================
+   MOBILE MENU BACKDROP
+   ======================================== */
+
+/* Mobile menu backdrop for overlay effect */
+.mobile-menu-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Mobile menu backdrop active state */
+.mobile-menu-backdrop.active {
+    display: block;
+    opacity: 1;
+}
+
+/* ========================================
+   MOBILE RESPONSIVE DESIGN (768px and below)
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* ========================================
+       MOBILE NAVIGATION
+       ======================================== */
+    
+    /* Navigation Layout Adjustment */
+    nav { 
+        justify-content: flex-end !important; 
+    }
+    
+    /* Mobile Menu Button Display */
+    .mobile-menu-button { 
+        display: block !important; 
+        position: fixed !important; 
+        top: 15px !important; 
+        right: 15px !important; 
+        z-index: 10000 !important; 
+    }
+    
+    /* Mobile Navigation Links */
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 75vw;
+        max-width: 320px;
+        background-color: var(--dark-gray);
+        flex-direction: column;
+        padding: 2rem 1.5rem;
+        gap: 1.5rem;
+        transition: transform 0.3s ease;
+        z-index: 10001 !important;
+        box-shadow: var(--shadow-strong);
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 12px;
+        transform: translateX(-100%);
+    }
+    
+    /* Mobile Navigation Active State */
+    .nav-links.active { 
+        display: flex; 
+        transform: translateX(0); 
+    }
+    
+    /* Mobile Navigation Link Styling */
+    .nav-links a {
+        height: auto;
+        padding: 1.2rem 0;
+        width: 100%;
+        text-align: left;
+        font-size: 1.15rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    /* Remove bottom border from last navigation link */
+    .nav-links a:last-child { 
+        border-bottom: none; 
+    }
+    
+    /* Remove underline effect on mobile */
+    .nav-links a::after { 
+        display: none; 
+    }
+    
+    /* Mobile navigation link hover effect */
+    .nav-links a:hover { 
+        background-color: rgba(255, 255, 255, 0.08); 
+    }
+    
+    /* Mobile active navigation link state */
+    .nav-links a.active {
+        background-color: rgba(255, 215, 0, 0.2);
+        color: var(--gold);
+        text-shadow: 0 0 8px var(--gold);
+    }
+    
+    /* ========================================
+       MOBILE LAYOUT ADJUSTMENTS
+       ======================================== */
+    
+    /* Mobile Container */
+    .container { 
+        padding: 0 1rem; 
+        max-width: 100%; 
+        margin: 0 auto; 
+    }
+    
+    /* ========================================
+       MOBILE PROJECTS GRID
+       ======================================== */
+    
+    /* Projects Grid - Mobile Single Column */
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    /* Mobile project card */
+    .project-card {
+        padding: 1.5rem;
+        min-height: 200px;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    
+    /* Mobile project logo */
+    .project-logo {
+        width: 100px;
+        height: 100px;
+    }
+    
+    /* Mobile project card title */
+    .project-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    /* Mobile project card description */
+    .project-card p {
+        font-size: 0.95rem;
+    }
+    
+    /* ========================================
+       MOBILE PROJECTS GRID
+       ======================================== */
+    
+    /* Projects Grid - Mobile Single Column */
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    /* Mobile project card */
+    .project-card {
+        padding: 1.5rem;
+        min-height: 200px;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    
+    /* Mobile project logo */
+    .project-logo {
+        width: 100px;
+        height: 100px;
+    }
+    
+    /* Mobile project card title */
+    .project-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    /* Mobile project card description */
+    .project-card p {
+        font-size: 0.95rem;
+    }
+    
+    /* ========================================
+       MOBILE MODALS
+       ======================================== */
+    
+    /* Mobile founder modal */
+    .founder-modal-content {
+        width: 95%;
+        max-width: 95vw;
+        max-height: 90vh;
+        margin: 1rem;
+    }
+    
+    /* Mobile founder modal header */
+    .founder-modal-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+        padding: 1.5rem 1rem 1rem 1rem;
+    }
+    
+    /* Mobile founder modal image */
+    .founder-modal-img {
+        width: 120px;
+        height: 120px;
+    }
+    
+    /* Mobile founder modal name */
+    .founder-modal-name {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+    
+    /* Mobile founder modal title */
+    .founder-modal-title {
+        font-size: 1rem;
+        text-align: center;
+    }
+    
+    /* Mobile founder modal body */
+    .founder-modal-body {
+        padding: 1rem 1.5rem 1.5rem 1.5rem;
+    }
+    
+    /* Mobile founder modal close button */
+    .founder-modal-close {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+    
+    /* Mobile projects modal */
+    .projects-modal-content {
+        width: 95%;
+        max-width: 95vw;
+        max-height: 90vh;
+        margin: 1rem;
+    }
+    
+    /* Mobile projects modal header */
+    .projects-modal-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+        padding: 1.5rem 1rem 1rem 1rem;
+    }
+    
+    /* Mobile projects modal image */
+    .projects-modal-img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    /* Mobile projects modal name */
+    .projects-modal-name {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+    
+    /* Mobile projects modal body */
+    .projects-modal-body {
+        padding: 1rem 1.5rem 1.5rem 1.5rem;
+    }
+    
+    /* Mobile projects modal close button */
+    .projects-modal-close {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+    
+    /* Mobile projects gallery */
+    .projects-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+        max-height: 250px;
+    }
+    
+    /* Mobile gallery image */
+    .projects-gallery-grid img {
+        height: 100px;
+    }
+    
+    /* Mobile fullscreen image modal */
+    .fullscreen-image-content {
+        max-width: 98vw;
+        max-height: 98vh;
+        margin: 1rem;
+    }
+    
+    /* Mobile fullscreen image */
+    .fullscreen-image {
+        max-width: 100%;
+        max-height: 80vh;
+    }
+    
+    /* Mobile fullscreen image close button */
+    .fullscreen-image-close {
+        top: -40px;
+        right: 0;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+    
+    /* Mobile fullscreen image caption */
+    .fullscreen-image-caption {
+        font-size: 0.9rem;
+        max-width: 90%;
+    }
+    
+    /* ========================================
+       MOBILE SERVICES AND VALUES GRIDS
+       ======================================== */
+    
+    /* Services and Values Grids - Mobile Single Column */
+    .services-grid, 
+    .values-grid-rows { 
+        gap: 1.5rem; 
+        max-width: 400px; 
+        margin: 0 auto; 
+    }
+    
+    /* Mobile row layouts for services and values */
+    .services-row, 
+    .values-row, 
+    .services-bottom-row, 
+    .values-row-bottom {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 400px;
+        margin: 0 auto;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* Mobile service and value cards */
+    .service-card, 
+    .value-card {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        text-align: center;
+        padding: 1.5rem;
+    }
+    
+    /* ========================================
+       MOBILE MODALS
+       ======================================== */
+    
+    /* Mobile founder modal */
+    .founder-modal-content {
+        width: 95%;
+        max-width: 95vw;
+        max-height: 90vh;
+        margin: 1rem;
+    }
+    
+    /* Mobile founder modal header */
+    .founder-modal-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+        padding: 1.5rem 1rem 1rem 1rem;
+    }
+    
+    /* Mobile founder modal image */
+    .founder-modal-img {
+        width: 120px;
+        height: 120px;
+    }
+    
+    /* Mobile founder modal name */
+    .founder-modal-name {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+    
+    /* Mobile founder modal title */
+    .founder-modal-title {
+        font-size: 1rem;
+        text-align: center;
+    }
+    
+    /* Mobile founder modal body */
+    .founder-modal-body {
+        padding: 1rem 1.5rem 1.5rem 1.5rem;
+    }
+    
+    /* Mobile founder modal close button */
+    .founder-modal-close {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+    
+    /* Mobile projects modal */
+    .projects-modal-content {
+        width: 95%;
+        max-width: 95vw;
+        max-height: 90vh;
+        margin: 1rem;
+    }
+    
+    /* Mobile projects modal header */
+    .projects-modal-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+        padding: 1.5rem 1rem 1rem 1rem;
+    }
+    
+    /* Mobile projects modal image */
+    .projects-modal-img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    /* Mobile projects modal name */
+    .projects-modal-name {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+    
+    /* Mobile projects modal body */
+    .projects-modal-body {
+        padding: 1rem 1.5rem 1.5rem 1.5rem;
+    }
+    
+    /* Mobile projects modal close button */
+    .projects-modal-close {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+    
+    /* Mobile projects gallery */
+    .projects-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+        max-height: 250px;
+    }
+    
+    /* Mobile gallery image */
+    .projects-gallery-grid img {
+        height: 100px;
+    }
+    
+    /* Mobile fullscreen image modal */
+    .fullscreen-image-content {
+        max-width: 98vw;
+        max-height: 98vh;
+        margin: 1rem;
+    }
+    
+    /* Mobile fullscreen image */
+    .fullscreen-image {
+        max-width: 100%;
+        max-height: 80vh;
+    }
+    
+    /* Mobile fullscreen image close button */
+    .fullscreen-image-close {
+        top: -40px;
+        right: 0;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+    
+    /* Mobile fullscreen image caption */
+    .fullscreen-image-caption {
+        font-size: 0.9rem;
+        max-width: 90%;
+    }
+    
+    /* ========================================
+       MOBILE FOUNDERS GRID
+       ======================================== */
+    
+    /* Founders Grid - Mobile 3 Columns Layout */
+    .founders-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        max-width: 100%;
+    }
+    
+    /* Mobile founder card */
+    .founder-card { 
+        padding: 1rem; 
+        max-width: 120px; 
+        margin: 0 auto;
+    }
+    
+    /* Mobile founder photo */
+    .founder-photo { 
+        width: 80px; 
+        height: 80px; 
+    }
+    
+    /* Mobile founder card heading */
+    .founder-card h3 { 
+        font-size: 0.9rem; 
+    }
+    
+    /* Mobile founder title */
+    .founder-title { 
+        font-size: 0.7rem; 
+    }
+    
+    /* ========================================
+       MOBILE TYPOGRAPHY
+       ======================================== */
+    
+    /* Mobile hero content */
+    .hero-content h1 { 
+        font-size: 2.2rem; 
+        text-align: center; 
+    }
+    
+    /* Mobile tagline */
+    .tagline { 
+        font-size: 1.1rem; 
+        margin-bottom: 1.2rem; 
+        text-align: center; 
+    }
+    
+    /* Mobile section adjustments */
+    .section { 
+        padding: 3rem 0; 
+        text-align: center; 
+    }
+    
+    /* Mobile section heading */
+    .section h2 { 
+        font-size: 1.5rem; 
+        margin-bottom: 1.2rem; 
+        text-align: center; 
+    }
+    
+    /* ========================================
+       MOBILE CONTACT FORM
+       ======================================== */
+    
+    /* Mobile contact form */
+    .contact-form { 
+        padding: 1rem; 
+        gap: 1rem; 
+        width: 100%; 
+        max-width: 100%; 
+        margin: 0 auto; 
+    }
+    
+    /* Mobile form group */
+    .form-group { 
+        text-align: left; 
+    }
+    
+    /* Mobile form inputs */
+    .form-group input, 
+    .form-group textarea { 
+        font-size: 1rem; 
+        padding: 0.7rem 0.8rem; 
+        width: 100%; 
+    }
+    
+    /* Mobile CTA button */
+    .contact-form .cta-button { 
+        width: 100%; 
+        font-size: 1rem; 
+        min-height: 44px; 
+        text-align: center; 
+    }
+    
+    /* ========================================
+       MOBILE FOOTER
+       ======================================== */
+    
+    /* Mobile footer content */
+    .footer-content { 
+        padding: 1rem 1rem 0.8rem 1rem; 
+        text-align: center; 
+    }
+    
+    /* Mobile footer grid */
+    .footer-grid { 
+        grid-template-columns: 1fr; 
+        gap: 1.5rem; 
+        text-align: center; 
+    }
+    
+    /* Mobile footer section */
+    .footer-section { 
+        align-items: center; 
+        text-align: center; 
+    }
+    
+    /* Mobile footer logo */
+    .footer-logo { 
+        max-width: 80px; 
+        margin: 0 auto; 
+    }
+    
+    /* Mobile footer tagline */
+    .footer-tagline { 
+        font-size: 0.9rem; 
+        line-height: 1.4; 
+        text-align: center; 
+    }
+    
+    /* Mobile footer heading */
+    .footer-heading { 
+        font-size: 1rem; 
+        margin-bottom: 0.5rem; 
+        text-align: center; 
+    }
+    
+    /* Mobile footer heading underline */
+    .footer-heading::after { 
+        left: 50%; 
+        transform: translateX(-50%); 
+    }
+    
+    /* Mobile footer links */
+    .footer-links { 
+        align-items: center; 
+        gap: 0.4rem; 
+        justify-content: center; 
+    }
+    
+    /* Mobile footer link styling */
+    .footer-links a { 
+        font-size: 0.8rem; 
+        padding: 0.15rem 0; 
+        text-align: center; 
+    }
+    
+    /* Mobile footer social media */
+    .footer-social { 
+        gap: 0.6rem; 
+        margin-top: 0.5rem; 
+        justify-content: center; 
+    }
+    
+    /* Mobile social media link */
+    .social-link { 
+        width: 28px; 
+        height: 28px; 
+        margin: 0 auto; 
+    }
+    
+    /* Mobile social media icon */
+    .social-link svg { 
+        width: 14px; 
+        height: 14px; 
+    }
+    
+    /* Mobile footer contact */
+    .footer-contact { 
+        gap: 0.5rem; 
+        text-align: center; 
+    }
+    
+    /* Mobile contact item */
+    .contact-item { 
+        font-size: 0.75rem; 
+        gap: 0.5rem; 
+        text-align: center; 
+        justify-content: center; 
+    }
+    
+    /* Mobile contact icon */
+    .contact-icon { 
+        width: 14px; 
+        height: 14px; 
+    }
+    
+    /* Mobile footer bottom content */
+    .footer-bottom-content { 
+        flex-direction: column; 
+        gap: 0.5rem; 
+        text-align: center; 
+    }
+    
+    /* Mobile footer legal links */
+    .footer-legal { 
+        gap: 0.5rem; 
+        justify-content: center; 
+    }
+    
+    /* Mobile footer copyright */
+    .footer-copyright { 
+        font-size: 0.75rem; 
+        text-align: center; 
+    }
+    
+    /* Mobile legal link */
+    .legal-link { 
+        font-size: 0.7rem; 
+        text-align: center; 
+    }
+    
+    /* Mobile footer waves */
+    .footer-waves { 
+        height: 60px; 
+    }
+    
+    /* ========================================
+       MOBILE IMAGES AND TEXT
+       ======================================== */
+    
+    /* Mobile image adjustments */
+    img { 
+        max-width: 100%; 
+        height: auto; 
+        display: block; 
+        margin: 0 auto; 
+    }
+    
+    /* Mobile text adjustments */
+    p, li, label { 
+        font-size: 0.95rem; 
+        line-height: 1.5; 
+        text-align: center; 
+    }
+}
+
+/* ========================================
+   SMALL MOBILE RESPONSIVE (576px and below)
+   ======================================== */
+
+@media (max-width: 576px) {
+    /* Small mobile container */
+    .container { 
+        padding: 0 0.8rem; 
+        max-width: 100%; 
+    }
+    
+    /* Small mobile hero height */
+    .hero { 
+        height: 50vh; 
+    }
+    
+    /* Small mobile hero content */
+    .hero-content h1 { 
+        font-size: 1.8rem; 
+        text-align: center; 
+    }
+    
+    /* Small mobile tagline */
+    .tagline { 
+        font-size: 1rem; 
+        text-align: center; 
+    }
+    
+    /* Small mobile section adjustments */
+    .section { 
+        padding: 2rem 0; 
+        text-align: center; 
+    }
+    
+    /* Small mobile section heading */
+    .section h2 { 
+        font-size: 1.3rem; 
+        text-align: center; 
+    }
+    
+    /* Small mobile lead text */
+    .lead-text { 
+        font-size: 1rem; 
+    }
+    
+    /* Small mobile service and value cards */
+    .service-card, 
+    .value-card { 
+        padding: 1.5rem; 
+        text-align: center; 
+        width: 100%; 
+        max-width: 100%; 
+        margin: 0 auto; 
+    }
+    
+    /* Small mobile card headings */
+    .service-card h3, 
+    .value-card h3 { 
+        font-size: 1rem; 
+        text-align: center; 
+    }
+    
+    /* Small mobile service card lists */
+    .service-card ul { 
+        font-size: 0.9rem; 
+    }
+    
+    /* Small mobile projects grid */
+    .projects-grid {
+        gap: 1rem;
+    }
+    
+    /* Small mobile project card */
+    .project-card {
+        padding: 1.2rem;
+        min-height: 180px;
+    }
+    
+    /* Small mobile project logo */
+    .project-logo {
+        width: 80px;
+        height: 80px;
+    }
+    
+    /* Small mobile project card title */
+    .project-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    /* Small mobile projects gallery */
+    .projects-gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+        max-height: 200px;
+    }
+    
+    /* Small mobile gallery image */
+    .projects-gallery-grid img {
+        height: 80px;
+    }
+    
+    /* Small mobile modals */
+    .founder-modal-content,
+    .projects-modal-content {
+        width: 98%;
+        max-width: 98vw;
+        margin: 0.5rem;
+    }
+    
+    /* Small mobile modal headers */
+    .founder-modal-header,
+    .projects-modal-header {
+        padding: 1rem 0.8rem 0.8rem 0.8rem;
+    }
+    
+    /* Small mobile modal images */
+    .founder-modal-img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .projects-modal-img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    /* Small mobile modal names */
+    .founder-modal-name,
+    .projects-modal-name {
+        font-size: 1.2rem;
+    }
+    
+    /* Small mobile modal bodies */
+    .founder-modal-body,
+    .projects-modal-body {
+        padding: 0.8rem 1rem 1rem 1rem;
+    }
+    
+    /* Small mobile modal close buttons */
+    .founder-modal-close,
+    .projects-modal-close {
+        width: 35px;
+        height: 35px;
+        font-size: 1.3rem;
+    }
+    
+    /* Small mobile fullscreen image modal */
+    .fullscreen-image-content {
+        max-width: 99vw;
+        margin: 0.5rem;
+    }
+    
+    /* Small mobile fullscreen image close button */
+    .fullscreen-image-close {
+        top: -35px;
+        width: 35px;
+        height: 35px;
+        font-size: 1.3rem;
+    }
+    
+    /* Small mobile projects grid */
+    .projects-grid {
+        gap: 1rem;
+    }
+    
+    /* Small mobile project card */
+    .project-card {
+        padding: 1.2rem;
+        min-height: 180px;
+    }
+    
+    /* Small mobile project logo */
+    .project-logo {
+        width: 80px;
+        height: 80px;
+    }
+    
+    /* Small mobile project card title */
+    .project-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    /* Small mobile projects gallery */
+    .projects-gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+        max-height: 200px;
+    }
+    
+    /* Small mobile gallery image */
+    .projects-gallery-grid img {
+        height: 80px;
+    }
+    
+    /* Small mobile modals */
+    .founder-modal-content,
+    .projects-modal-content {
+        width: 98%;
+        max-width: 98vw;
+        margin: 0.5rem;
+    }
+    
+    /* Small mobile modal headers */
+    .founder-modal-header,
+    .projects-modal-header {
+        padding: 1rem 0.8rem 0.8rem 0.8rem;
+    }
+    
+    /* Small mobile modal images */
+    .founder-modal-img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .projects-modal-img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    /* Small mobile modal names */
+    .founder-modal-name,
+    .projects-modal-name {
+        font-size: 1.2rem;
+    }
+    
+    /* Small mobile modal bodies */
+    .founder-modal-body,
+    .projects-modal-body {
+        padding: 0.8rem 1rem 1rem 1rem;
+    }
+    
+    /* Small mobile modal close buttons */
+    .founder-modal-close,
+    .projects-modal-close {
+        width: 35px;
+        height: 35px;
+        font-size: 1.3rem;
+    }
+    
+    /* Small mobile fullscreen image modal */
+    .fullscreen-image-content {
+        max-width: 99vw;
+        margin: 0.5rem;
+    }
+    
+    /* Small mobile fullscreen image close button */
+    .fullscreen-image-close {
+        top: -35px;
+        width: 35px;
+        height: 35px;
+        font-size: 1.3rem;
+    }
+    
+    /* ========================================
+       SMALL MOBILE FOUNDERS GRID
+       ======================================== */
+    
+    /* Founders Grid - Small Mobile 2 Columns Layout */
+    .founders-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+        max-width: 100%;
+    }
+    
+    /* Small mobile founder card */
+    .founder-card { 
+        padding: 0.8rem; 
+        max-width: 100px; 
+        margin: 0 auto;
+    }
+    
+    /* Small mobile founder photo */
+    .founder-photo { 
+        width: 60px; 
+        height: 60px; 
+    }
+    
+    /* Small mobile founder heading */
+    .founder-card h3 { 
+        font-size: 0.8rem; 
+    }
+    
+    /* Small mobile founder title */
+    .founder-title { 
+        font-size: 0.6rem; 
+    }
+    
+    /* Small mobile contact form */
+    .contact-form { 
+        padding: 1rem; 
+        text-align: center; 
+    }
+    
+    /* Small mobile form inputs */
+    .form-group input, 
+    .form-group textarea { 
+        padding: 0.7rem 0.8rem; 
+        font-size: 0.9rem; 
+        width: 100%; 
+    }
+    
+    /* Small mobile footer adjustments */
+    .footer-content { 
+        padding: 0.8rem 0.8rem 0.6rem 0.8rem; 
+        text-align: center; 
+    }
+    
+    /* Small mobile footer grid */
+    .footer-grid { 
+        gap: 1rem; 
+        text-align: center; 
+    }
+    
+    /* Small mobile footer logo */
+    .footer-logo { 
+        max-width: 70px; 
+        margin: 0 auto; 
+    }
+    
+    /* Small mobile footer heading */
+    .footer-heading { 
+        font-size: 0.9rem; 
+        text-align: center; 
+    }
+    
+    /* Small mobile footer links */
+    .footer-links a { 
+        font-size: 0.75rem; 
+        text-align: center; 
+    }
+    
+    /* Small mobile contact item */
+    .contact-item { 
+        font-size: 0.7rem; 
+        text-align: center; 
+        justify-content: center; 
+    }
+    
+    /* Small mobile social link */
+    .social-link { 
+        width: 24px; 
+        height: 24px; 
+        margin: 0 auto; 
+    }
+    
+    /* Small mobile social icon */
+    .social-link svg { 
+        width: 12px; 
+        height: 12px; 
+    }
+    
+    /* Small mobile footer copyright */
+    .footer-copyright { 
+        font-size: 0.7rem; 
+        text-align: center; 
+    }
+    
+    /* Small mobile legal link */
+    .legal-link { 
+        font-size: 0.65rem; 
+        text-align: center; 
+    }
+    
+    /* Small mobile footer waves */
+    .footer-waves { 
+        height: 40px; 
+    }
+    
+    /* Small mobile text adjustments */
+    p, li, label { 
+        font-size: 0.85rem; 
+        text-align: center; 
+    }
+}
+
+/* ========================================
+   EXTRA SMALL MOBILE RESPONSIVE (480px and below)
+   ======================================== */
+
+@media (max-width: 480px) {
+    /* Extra small mobile container */
+    .container { 
+        padding: 0 0.6rem; 
+        max-width: 100%; 
+    }
+    
+    /* Extra small mobile hero content */
+    .hero-content h1 { 
+        font-size: 1.6rem; 
+        text-align: center; 
+    }
+    
+    /* Extra small mobile tagline */
+    .tagline { 
+        font-size: 0.9rem; 
+        text-align: center; 
+    }
+    
+    /* Extra small mobile section heading */
+    .section h2 { 
+        font-size: 1.2rem; 
+        text-align: center; 
+    }
+    
+    /* Extra small mobile projects grid */
+    .projects-grid {
+        gap: 0.8rem;
+    }
+    
+    /* Extra small mobile project card */
+    .project-card {
+        padding: 1rem;
+        min-height: 160px;
+    }
+    
+    /* Extra small mobile project logo */
+    .project-logo {
+        width: 70px;
+        height: 70px;
+    }
+    
+    /* Extra small mobile project card title */
+    .project-card h3 {
+        font-size: 1rem;
+    }
+    
+    /* Extra small mobile projects gallery */
+    .projects-gallery-grid {
+        gap: 0.5rem;
+        max-height: 180px;
+    }
+    
+    /* Extra small mobile gallery image */
+    .projects-gallery-grid img {
+        height: 70px;
+    }
+    
+    /* Extra small mobile modals */
+    .founder-modal-content,
+    .projects-modal-content {
+        width: 99%;
+        max-width: 99vw;
+        margin: 0.3rem;
+    }
+    
+    /* Extra small mobile modal headers */
+    .founder-modal-header,
+    .projects-modal-header {
+        padding: 0.8rem 0.6rem 0.6rem 0.6rem;
+    }
+    
+    /* Extra small mobile modal images */
+    .founder-modal-img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .projects-modal-img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    /* Extra small mobile modal names */
+    .founder-modal-name,
+    .projects-modal-name {
+        font-size: 1.1rem;
+    }
+    
+    /* Extra small mobile modal bodies */
+    .founder-modal-body,
+    .projects-modal-body {
+        padding: 0.6rem 0.8rem 0.8rem 0.8rem;
+    }
+    
+    /* Extra small mobile modal close buttons */
+    .founder-modal-close,
+    .projects-modal-close {
+        width: 30px;
+        height: 30px;
+        font-size: 1.1rem;
+    }
+    
+    /* Extra small mobile fullscreen image modal */
+    .fullscreen-image-content {
+        max-width: 99.5vw;
+        margin: 0.3rem;
+    }
+    
+    /* Extra small mobile fullscreen image close button */
+    .fullscreen-image-close {
+        top: -30px;
+        width: 30px;
+        height: 30px;
+        font-size: 1.1rem;
+    }
+    
+    /* Extra small mobile projects grid */
+    .projects-grid {
+        gap: 0.8rem;
+    }
+    
+    /* Extra small mobile project card */
+    .project-card {
+        padding: 1rem;
+        min-height: 160px;
+    }
+    
+    /* Extra small mobile project logo */
+    .project-logo {
+        width: 70px;
+        height: 70px;
+    }
+    
+    /* Extra small mobile project card title */
+    .project-card h3 {
+        font-size: 1rem;
+    }
+    
+    /* Extra small mobile projects gallery */
+    .projects-gallery-grid {
+        gap: 0.5rem;
+        max-height: 180px;
+    }
+    
+    /* Extra small mobile gallery image */
+    .projects-gallery-grid img {
+        height: 70px;
+    }
+    
+    /* Extra small mobile modals */
+    .founder-modal-content,
+    .projects-modal-content {
+        width: 99%;
+        max-width: 99vw;
+        margin: 0.3rem;
+    }
+    
+    /* Extra small mobile modal headers */
+    .founder-modal-header,
+    .projects-modal-header {
+        padding: 0.8rem 0.6rem 0.6rem 0.6rem;
+    }
+    
+    /* Extra small mobile modal images */
+    .founder-modal-img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .projects-modal-img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    /* Extra small mobile modal names */
+    .founder-modal-name,
+    .projects-modal-name {
+        font-size: 1.1rem;
+    }
+    
+    /* Extra small mobile modal bodies */
+    .founder-modal-body,
+    .projects-modal-body {
+        padding: 0.6rem 0.8rem 0.8rem 0.8rem;
+    }
+    
+    /* Extra small mobile modal close buttons */
+    .founder-modal-close,
+    .projects-modal-close {
+        width: 30px;
+        height: 30px;
+        font-size: 1.1rem;
+    }
+    
+    /* Extra small mobile fullscreen image modal */
+    .fullscreen-image-content {
+        max-width: 99.5vw;
+        margin: 0.3rem;
+    }
+    
+    /* Extra small mobile fullscreen image close button */
+    .fullscreen-image-close {
+        top: -30px;
+        width: 30px;
+        height: 30px;
+        font-size: 1.1rem;
+    }
+    
+    /* ========================================
+       EXTRA SMALL MOBILE FOUNDERS GRID
+       ======================================== */
+    
+    /* Founders Grid - Extra Small Mobile Single Column Layout */
+    .founders-grid {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 0.6rem;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    /* Extra small mobile founder card */
+    .founder-card { 
+        padding: 0.6rem; 
+        max-width: 200px; 
+        margin: 0 auto;
+    }
+    
+    /* Extra small mobile founder photo */
+    .founder-photo { 
+        width: 50px; 
+        height: 50px; 
+    }
+    
+    /* Extra small mobile founder heading */
+    .founder-card h3 { 
+        font-size: 0.7rem; 
+    }
+    
+    /* Extra small mobile founder title */
+    .founder-title { 
+        font-size: 0.5rem; 
+    }
+    
+    /* Extra small mobile footer adjustments */
+    .footer-content { 
+        padding: 0.6rem 0.6rem 0.4rem 0.6rem; 
+        text-align: center; 
+    }
+    
+    /* Extra small mobile footer logo */
+    .footer-logo { 
+        max-width: 60px; 
+        margin: 0 auto; 
+    }
+    
+    /* Extra small mobile footer heading */
+    .footer-heading { 
+        font-size: 0.85rem; 
+        text-align: center; 
+    }
+    
+    /* Extra small mobile footer links */
+    .footer-links a { 
+        font-size: 0.7rem; 
+        text-align: center; 
+    }
+    
+    /* Extra small mobile contact item */
+    .contact-item { 
+        font-size: 0.65rem; 
+        text-align: center; 
+        justify-content: center; 
+    }
+    
+    /* Extra small mobile social link */
+    .social-link { 
+        width: 22px; 
+        height: 22px; 
+        margin: 0 auto; 
+    }
+    
+    /* Extra small mobile social icon */
+    .social-link svg { 
+        width: 11px; 
+        height: 11px; 
+    }
+}
+
+/* ========================================
+   LANDSCAPE ORIENTATION OPTIMIZATIONS
+   ======================================== */
+
+@media (max-height: 500px) and (orientation: landscape) {
+    /* Landscape hero height adjustment */
+    .hero { 
+        height: 40vh; 
+    }
+    
+    /* Landscape navigation adjustments */
+    .nav-links { 
+        padding: 1rem 1.5rem; 
+        gap: 1rem; 
+    }
+    
+    /* Landscape modal adjustments */
+    .founder-modal-content,
+    .projects-modal-content {
+        max-height: 95vh;
+        margin: 0.5rem;
+    }
+    
+    /* Landscape modal headers */
+    .founder-modal-header,
+    .projects-modal-header {
+        padding: 1rem 1.5rem 0.8rem 1.5rem;
+    }
+    
+    /* Landscape modal images */
+    .founder-modal-img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .projects-modal-img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    /* Landscape modal adjustments */
+    .founder-modal-content,
+    .projects-modal-content {
+        max-height: 95vh;
+        margin: 0.5rem;
+    }
+    
+    /* Landscape modal headers */
+    .founder-modal-header,
+    .projects-modal-header {
+        padding: 1rem 1.5rem 0.8rem 1.5rem;
+    }
+    
+    /* Landscape modal images */
+    .founder-modal-img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .projects-modal-img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    /* Landscape footer adjustments */
+    .footer-content { 
+        padding: 0.5rem 1rem; 
+    }
+    
+    /* Landscape footer grid */
+    .footer-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 1rem; 
+    }
+}
+
+/* ========================================
+   HIGH DPI DISPLAY SUPPORT
+   ======================================== */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* High DPI image rendering optimizations */
+    .footer-logo, 
+    .main-logo, 
+    .founder-photo,
+    .project-logo,
+    .projects-modal-img,
+    .founder-modal-img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* ========================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ======================================== */
+
+@media (hover: none) and (pointer: coarse) {
+    /* Touch device hover effect removal */
+    .footer-links a:hover, 
+    .social-link:hover, 
+    .legal-link:hover,
+    .project-card:hover,
+    .project-logo-btn:hover,
+    .founder-photo:hover { 
+        transform: none; 
+    }
+    
+    /* Touch device active state effects */
+    .footer-links a:active, 
+    .social-link:active, 
+    .legal-link:active,
+    .project-card:active,
+    .project-logo-btn:active,
+    .founder-photo:active { 
+        transform: scale(0.95); 
+    }
+    
+    /* Touch device modal optimizations */
+    .founder-modal-close,
+    .projects-modal-close,
+    .fullscreen-image-close {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
